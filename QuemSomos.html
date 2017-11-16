@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>NYX</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/font-awesome.css">
+        <link rel="stylesheet" href="css/Inicial.css">
+        <link rel="stylesheet" href="css/Footer.css">
+        <link rel="stylesheet" href="css/carousel.css">
+        <link rel="stylesheet" href="css/ColunasBT.css">
+        <link rel="stylesheet" href="css/hoverbtn.css">
+        <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    </head>
+    <body class="p-0">
+        <script>
+
+            var colors = new Array(
+                    [10, 224, 252], // azul claro 1E
+                    [8, 237, 18], //'verde lima 2E
+                    [255, 35, 98], //
+                    [45, 175, 230], //azul 1D
+                    [255, 0, 255], //rosa
+                    [255, 0, 0]); //vermelho
+
+            var step = 0;
+//color table indices for: 
+// current color left
+// next color left
+// current color right
+// next color right
+            var colorIndices = [0, 1, 2, 3];
+
+//transition speed
+            var gradientSpeed = 0.002;
+
+            function updateGradient()
+            {
+
+                if ($ === undefined)
+                    return;
+
+                var c0_0 = colors[colorIndices[0]];
+                var c0_1 = colors[colorIndices[1]];
+                var c1_0 = colors[colorIndices[2]];
+                var c1_1 = colors[colorIndices[3]];
+
+                var istep = 1 - step;
+                var r1 = Math.round(istep * c0_0[0] + step * c0_1[0]);
+                var g1 = Math.round(istep * c0_0[1] + step * c0_1[1]);
+                var b1 = Math.round(istep * c0_0[2] + step * c0_1[2]);
+                var color1 = "rgb(" + r1 + "," + g1 + "," + b1 + ")";
+
+                var r2 = Math.round(istep * c1_0[0] + step * c1_1[0]);
+                var g2 = Math.round(istep * c1_0[1] + step * c1_1[1]);
+                var b2 = Math.round(istep * c1_0[2] + step * c1_1[2]);
+                var color2 = "rgb(" + r2 + "," + g2 + "," + b2 + ")";
+
+                $('#gradient').css({
+                    background: "-webkit-gradient(linear, left top, right top, from(" + color1 + "), to(" + color2 + "))"}).css({
+                    background: "-moz-linear-gradient(left, " + color1 + " 0%, " + color2 + " 100%)"});
+
+                step += gradientSpeed;
+                if (step >= 1)
+                {
+                    step %= 1;
+                    colorIndices[0] = colorIndices[1];
+                    colorIndices[2] = colorIndices[3];
+
+                    //pick two new target color indices
+                    //do not pick the same as the current one
+                    colorIndices[1] = (colorIndices[1] + Math.floor(1 + Math.random() * (colors.length - 1))) % colors.length;
+                    colorIndices[3] = (colorIndices[3] + Math.floor(1 + Math.random() * (colors.length - 1))) % colors.length;
+
+                }
+            }
+
+            setInterval(updateGradient, 10);
+        </script>
+        <div id="gradient">
+            <div class="container p-landing">
+                <nav class="navbar navbar-expand-lg navbar-light fixed-top " style="background-color: transparent !important;">
+                    <a class="navbar-brand" href="#">
+                        <img src="">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse container" id="navbarNavDropdown">
+                        <ul class="navbar-nav ">
+                            <li class="nav-item active">
+                                <a class="nav-link color-white" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  color-white" href="#">Features</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  color-white" href="#">Pricing</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle color-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdown link
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0 ml-auto" style="padding-right: 15px;">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+
+                    </div>
+                </nav>
+            </div>
+
+            <div class="container" style="padding-top: 50px;">
+                <div class="row"> 
+                    <div class="col">
+                        <div>
+                            <h1 class=" text-center color-white">Quem somos.</h1>
+                            <p class=" text-center color-white">
+                                A grande missão da 
+                                NYX é atender ao nosso publico trazendo as melhores peças com a melhor qualidade disponível no mercado atualmente, na busca do maior número possível de informações que mostrem possibilidades acessíveis e de qualidade, virtuais ou presenciais, em todas as áreas da atividade humana: da tecnologia, passando pelo lazer e acessibilidade, até educação. 
+                                Temos um foco especial em tecnologia, mas também buscamos aprimorar diariamente 
+                                a nossa empresa para satisfazer a necessidade do nosso consumidor.
+                                Inspiramos soluções comunitárias inovadoras e inclusivas. Queremos ajudar as 
+                                pessoas em suas buscas por tecnologia.
+                                Como apostamos na engenhosidade da comunidade, a seleção das notícias é complementada por milhares de pessoas cadastradas em nossa rede.
+
+                            </p>
+                            <a href="#tm-section-2" class="tm-btn-white-big">Explore</a>
+                        </div>            
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <script src="JS/jquery-3.2.1.min.js"></script>
+        <script src="JS/popper.min.js"></script>
+        <script src="JS/bootstrap.js"></script>
+        <script src="JS/app.js"></script>
+    </body>
+</html>
