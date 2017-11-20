@@ -120,3 +120,12 @@ animation: AnimationName 57s ease infinite;
     padding: 0px;
     margin: 0px;
 }
+.archivo{
+    font-family: 'Archivo Black', sans-serif;
+}
+.line-h{
+    line-height: 30px;
+}
+.btn-product{
+	width: 100%;
+}
